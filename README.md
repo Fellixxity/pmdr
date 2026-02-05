@@ -8,7 +8,7 @@ Since this project was created manually, please follow these steps to run it:
 
 1.  **Open a terminal** and navigate to this directory:
     ```bash
-    cd "C:\Users\syoum\.gemini\antigravity\scratch\pomodoro-timer"
+    cd "C:\Users\-----\.gemini\antigravity\scratch\pomodoro-timer"
     ```
 
 2.  **Install dependencies**:
@@ -36,3 +36,4 @@ Since this project was created manually, please follow these steps to run it:
 - React
 - Vanilla CSS (Variables & Animations)
 - Lucide React (Icons)
+
