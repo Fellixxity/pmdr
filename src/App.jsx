@@ -50,7 +50,8 @@ function App() {
                 <header style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '-1rem' }}>
                     <h1 style={{ fontSize: '1.25rem', fontWeight: 600, letterSpacing: '0.05em' }}>FOCUS FLOW</h1>
                     <button
-                        onClick={() => {
+                        onClick={(e) => {
+                            e.stopPropagation();
                             // playClick(); // Temporarily disabled to prevent potential audio context lock
                             setIsSettingsOpen(true);
                         }}
