@@ -27,21 +27,31 @@ const useTimer = (mode, customSettings = defaultSettings) => {
     }, [mode, customSettings]);
 
     useEffect(() => {
+        let interval;
         if (isActive && timeLeft > 0) {
-            timerRef.current = setInterval(() => {
-                setTimeLeft((prev) => prev - 1);
+            // Calculate the exact time when the timer should finish
+            const endTime = Date.now() + timeLeft * 1000;
+
+            interval = setInterval(() => {
+                const now = Date.now();
+                const remaining = Math.max(0, Math.round((endTime - now) / 1000));
+
+                if (remaining <= 0) {
+                    setTimeLeft(0);
+                    setIsActive(false);
+                    playChime();
+                    clearInterval(interval);
+                } else {
+                    // Only update state if the rounded second has changed
+                    setTimeLeft(remaining);
+                }
             }, 1000);
-        } else if (timeLeft === 0) {
-            // Timer finished
-            setIsActive(false);
-            clearInterval(timerRef.current);
-            playChime(); // Play sound
         }
 
         return () => {
-            if (timerRef.current) clearInterval(timerRef.current);
+            if (interval) clearInterval(interval);
         };
-    }, [isActive, timeLeft]);
+    }, [isActive]); // Only restart the tracker when isActive changes
 
     const toggleTimer = () => {
         setIsActive(!isActive);
